@@ -10,6 +10,20 @@ export function Projects() {
 
   const projects = [
     {
+      title: "Music-Player",
+      description: "A modern, responsive music player web application built with React and Vite, providing a sleek interface for playing audio tracks with multiple controls and features.",
+      technologies: ["React", "Vite", "TypeScript", "CSS"],
+      github: "https://github.com/farhadalibayli/CodeAlpha_Music-Player",
+      image: "https://i.imgur.com/wty396F.png",
+    },
+    {
+      title: "Calculator",
+      description: "A modern, responsive calculator web application built with React and Vite, featuring a sleek glass-morphism UI design with smooth animations and a history feature.",
+      technologies: ["React", "Vite", "TypeScript", "CSS"],
+      github: "https://github.com/farhadalibayli/CodeAlpha_Calculator",
+      image: "https://i.imgur.com/Ui2Gt3W.png",
+    },
+    {
       title: "Q&A platform",
       description: "RealCavab is a multilingual Q&A platform with smart search, real-time moderation, and strong user management.",
       technologies: ["TypeScript", "Node.js", "CSS", "MySQL"],
@@ -43,6 +57,20 @@ export function Projects() {
       technologies: ["TypeScript", "Java", "Spring Boot", "Edamam API"],
       github: "https://github.com/farhadalibayli/PlanMeal",
       image: "https://i.imgur.com/rPYLTGB.png",
+    },
+    {
+      title: "Calculator",
+      description: "A modern, responsive calculator web application built with React and Vite, featuring a sleek glass-morphism UI design with smooth animations and a history feature.",
+      technologies: ["JavaScript", "CSS", "HTML", "Vite"],
+      github: "https://github.com/farhadalibayli/CodeAlpha_Calculator",
+      image: "https://i.imgur.com/Ui2Gt3W.png",
+    },
+    {
+      title: "Music Player",
+      description: "A modern, responsive music player web application built with React and Vite, providing a sleek interface for playing audio tracks with multiple controls and features.",
+      technologies: ["JavaScript", "CSS", "HTML", "Vite"],
+      github: "https://github.com/farhadalibayli/CodeAlpha_Music-Player",
+      image: "https://i.imgur.com/wty396F.png",
     },
   ];
 

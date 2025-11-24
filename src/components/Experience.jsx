@@ -7,6 +7,18 @@ export function Experience() {
   const experiences = [
     {
       type: "work",
+      title: "Frontend Developer Internship",
+      company: "CodeAlpha",
+      location: "Online, Remote",
+      period: "Nov 2025 - Present",
+      description: [
+        "Developed responsive web interfaces using JavaScript, HTML, and CSS",
+        "Implemented interactive features and UI components across real project tasks",
+        "Enhanced code quality and frontend performance through continuous practice",
+      ],
+    },
+    {
+      type: "work",
       title: "Back End Developer Internship",
       company: "DOST Digital Innovations Center",
       location: "Baku, Azerbaijan, Remote",
