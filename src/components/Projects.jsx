@@ -10,6 +10,13 @@ export function Projects() {
 
   const projects = [
     {
+      title: "InternLink",
+      description: "This is a frontend web project for an “InternLink” website — a platform UI focused on internships.",
+      technologies: ["Javascript", "Vite", "HTML", "CSS"],
+      website: "https://internlink0.netlify.app/",
+      image: "https://i.imgur.com/M5rjvnG.png",
+    },
+    {
       title: "Music-Player",
       description: "A modern, responsive music player web application built with React and Vite, providing a sleek interface for playing audio tracks with multiple controls and features.",
       technologies: ["React", "Vite", "TypeScript", "CSS"],
@@ -141,6 +148,14 @@ export function Projects() {
                   </div>
 
                   <div className="flex gap-3">
+                    {project.website && (
+                      <Button variant="outline" size="sm" className="w-full group/btn" asChild>
+                        <a href={project.website} target="_blank" rel="noopener noreferrer">
+                          <ArrowRight className="w-4 h-4 mr-2 group-hover/btn:translate-x-1 transition-transform" />
+                          View Website
+                        </a>
+                      </Button>
+                    )}
                     {project.github && (
                       <Button variant="outline" size="sm" className="w-full group/btn" asChild>
                         <a href={project.github} target="_blank" rel="noopener noreferrer">
