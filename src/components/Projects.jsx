@@ -65,20 +65,6 @@ export function Projects() {
       github: "https://github.com/farhadalibayli/PlanMeal",
       image: "https://i.imgur.com/rPYLTGB.png",
     },
-    {
-      title: "Calculator",
-      description: "A modern, responsive calculator web application built with React and Vite, featuring a sleek glass-morphism UI design with smooth animations and a history feature.",
-      technologies: ["JavaScript", "CSS", "HTML", "Vite"],
-      github: "https://github.com/farhadalibayli/CodeAlpha_Calculator",
-      image: "https://i.imgur.com/Ui2Gt3W.png",
-    },
-    {
-      title: "Music Player",
-      description: "A modern, responsive music player web application built with React and Vite, providing a sleek interface for playing audio tracks with multiple controls and features.",
-      technologies: ["JavaScript", "CSS", "HTML", "Vite"],
-      github: "https://github.com/farhadalibayli/CodeAlpha_Music-Player",
-      image: "https://i.imgur.com/wty396F.png",
-    },
   ];
 
   const visibleProjects = projects.slice(0, visibleCount);
