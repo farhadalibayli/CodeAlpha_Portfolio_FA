@@ -3,10 +3,36 @@
   import react from '@vitejs/plugin-react-swc';
   import path from 'path';
 
+  // Determine base path for GitHub Pages
+  function getBasePath() {
+    // If VITE_BASE_PATH is explicitly set, use it
+    if (process.env.VITE_BASE_PATH) {
+      return process.env.VITE_BASE_PATH.startsWith('/') 
+        ? process.env.VITE_BASE_PATH 
+        : `/${process.env.VITE_BASE_PATH}/`;
+    }
+    
+    // For GitHub Actions, extract repository name from GITHUB_REPOSITORY
+    // GITHUB_REPOSITORY format: "owner/repo-name"
+    if (process.env.GITHUB_REPOSITORY) {
+      const parts = process.env.GITHUB_REPOSITORY.split('/');
+      if (parts.length === 2) {
+        const repoName = parts[1];
+        // If it's a github.io repo, use root, otherwise use repo name as base
+        if (repoName.includes('github.io')) {
+          return '/';
+        }
+        // Ensure base path starts and ends with /
+        return `/${repoName}/`;
+      }
+    }
+    
+    // Default to root for local development
+    return '/';
+  }
+
   export default defineConfig({
-    base: process.env.GITHUB_REPOSITORY 
-      ? (process.env.GITHUB_REPOSITORY.split('/')[1].includes('github.io') ? '/' : `/${process.env.GITHUB_REPOSITORY.split('/')[1]}/`)
-      : '/',
+    base: basePath,
     plugins: [react()],
     resolve: {
       extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],
