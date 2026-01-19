@@ -10,10 +10,17 @@ export function Projects() {
 
   const projects = [
     {
+      title: "Idea-finder",
+      description: "Idea Finder is an AI-powered web app that generates real business ideas based on a keyword, location, and budget.",
+      technologies: ["TypeScript", "Llama3", "Ollama", "Cheerio"],
+      github: "https://github.com/farhadalibayli/idea-finder.git",
+      image: "https://i.imgur.com/IBwh0le.png",
+    },
+    {
       title: "InternLink",
       description: "This is a frontend web project for an “InternLink” website — a platform UI focused on internships.",
       technologies: ["Javascript", "Vite", "HTML", "CSS"],
-      website: "https://internlink0.netlify.app/",
+      github: "https://github.com/farhadalibayli/InternLink.git",
       image: "https://i.imgur.com/M5rjvnG.png",
     },
     {
