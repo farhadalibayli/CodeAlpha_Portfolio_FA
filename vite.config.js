@@ -31,6 +31,8 @@
     return '/';
   }
 
+  const basePath = getBasePath();
+
   export default defineConfig({
     base: basePath,
     plugins: [react()],

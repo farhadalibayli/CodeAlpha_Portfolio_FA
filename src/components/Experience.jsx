@@ -7,26 +7,26 @@ export function Experience() {
   const experiences = [
     {
       type: "work",
-      title: "Frontend Developer Internship",
-      company: "CodeAlpha",
-      location: "Online, Remote",
-      period: "Nov 2025 - Present",
-      description: [
-        "Developed responsive web interfaces using JavaScript, HTML, and CSS",
-        "Implemented interactive features and UI components across real project tasks",
-        "Enhanced code quality and frontend performance through continuous practice",
-      ],
-    },
-    {
-      type: "work",
       title: "Back End Developer Internship",
       company: "DOST Digital Innovations Center",
       location: "Baku, Azerbaijan, Remote",
-      period: "Aug 2025 - Present",
+      period: "Aug 2025 - Dec 2025",
       description: [
         "Designed and implemented server-side logic for backend projects",
         "Built APIs and created efficient algorithms to solve problems",
         "Worked on real-world applications to improve functionality and performance",
+      ],
+    },
+    {
+      type: "work",
+      title: "Frontend Developer Internship",
+      company: "CodeAlpha",
+      location: "Online, Remote",
+      period: "Nov 2025 - Dec 2025",
+      description: [
+        "Developed responsive web interfaces using JavaScript, HTML, and CSS",
+        "Implemented interactive features and UI components across real project tasks",
+        "Enhanced code quality and frontend performance through continuous practice",
       ],
     },
     {
@@ -166,8 +166,9 @@ export function Experience() {
 
   const handleDownloadResume = () => {
     try {
-      // Using the public URL directly since we're in a create-react-app
-      const resumeUrl = '/resume/Farhad_Alibayli_Resume.pdf';
+      // Use import.meta.env.BASE_URL to get the base path for GitHub Pages
+      const baseUrl = import.meta.env.BASE_URL;
+      const resumeUrl = `${baseUrl}resume/Farhad_Alibayli_Resume.pdf`;
       
       // Create a temporary anchor element
       const link = document.createElement('a');
@@ -186,7 +187,8 @@ export function Experience() {
     } catch (error) {
       console.error('Error downloading resume:', error);
       // Fallback: Open in new tab if download fails
-      window.open('/resume/Farhad_Alibayli_Resume.pdf', '_blank');
+      const baseUrl = import.meta.env.BASE_URL;
+      window.open(`${baseUrl}resume/Farhad_Alibayli_Resume.pdf`, '_blank');
     }
   };
 

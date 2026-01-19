@@ -29,7 +29,11 @@ jobs:
       - name: Build Vite app
         env:
           GITHUB_REPOSITORY: ${{ github.repository }}
-        run: npm run build
+        run: |
+          echo "Building with repository: $GITHUB_REPOSITORY"
+          npm run build
+          echo "Build completed. Checking base path in index.html..."
+          grep -E "src=|href=" build/index.html || true
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
