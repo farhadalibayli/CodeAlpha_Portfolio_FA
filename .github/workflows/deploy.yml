@@ -29,14 +29,67 @@ jobs:
       - name: Build Vite app
         env:
           GITHUB_REPOSITORY: ${{ github.repository }}
+          CI: true
         run: |
-          echo "Building with repository: $GITHUB_REPOSITORY"
+          echo "=== Build Configuration ==="
+          echo "Repository: $GITHUB_REPOSITORY"
+          echo "Node version: $(node --version)"
+          echo "NPM version: $(npm --version)"
+          echo ""
+          echo "=== Starting Build ==="
           npm run build
-          echo "Build completed. Checking base path in index.html..."
-          grep -E "src=|href=" build/index.html || true
+          echo ""
+          echo "=== Build Verification ==="
+          echo "Checking if build directory exists..."
+          ls -la build/ || echo "ERROR: build directory not found!"
+          echo ""
+          echo "Checking index.html content..."
+          if [ -f build/index.html ]; then
+            echo "✅ index.html exists"
+            echo "File content:"
+            cat build/index.html
+            echo ""
+            echo "Asset references:"
+            grep -E "src=|href=" build/index.html || echo "No src/href found"
+          else
+            echo "❌ ERROR: build/index.html not found!"
+            exit 1
+          fi
+          echo ""
+          echo "Checking assets directory..."
+          ls -la build/assets/ || echo "WARNING: assets directory not found"
+          echo ""
           echo "Ensuring .nojekyll file exists..."
-          touch build/.nojekyll || echo "" > build/.nojekyll
-          ls -la build/ | head -20
+          touch build/.nojekyll
+          echo "✅ .nojekyll file created"
+
+      - name: Verify build output
+        run: |
+          echo "=== Verifying Build Output ==="
+          if [ ! -f build/index.html ]; then
+            echo "❌ ERROR: build/index.html does not exist!"
+            exit 1
+          fi
+          
+          # Check if it's the built version (has assets references) or source version (has /src/main.jsx)
+          if grep -q "/src/main.jsx" build/index.html; then
+            echo "❌ ERROR: build/index.html contains source file reference (/src/main.jsx)!"
+            echo "This means the build didn't transform the HTML correctly."
+            echo "File content:"
+            cat build/index.html
+            exit 1
+          fi
+          
+          if ! grep -q "assets/" build/index.html; then
+            echo "❌ ERROR: build/index.html doesn't contain asset references!"
+            echo "File content:"
+            cat build/index.html
+            exit 1
+          fi
+          
+          echo "✅ Build verification passed"
+          echo "Asset references found:"
+          grep -E "src=|href=.*assets" build/index.html
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3

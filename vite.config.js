@@ -36,7 +36,11 @@
   }
 
   const basePath = getBasePath();
-  console.log('Vite base path configured as:', basePath);
+  
+  // Log the base path for debugging (only in build mode)
+  if (process.env.NODE_ENV !== 'production' || process.env.CI) {
+    console.log('Vite base path configured as:', basePath);
+  }
 
   // Plugin to generate .nojekyll file for GitHub Pages
   const nojekyllPlugin = () => {
