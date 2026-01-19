@@ -1,4 +1,4 @@
-name: Deploy Next.js Site to GitHub Pages
+name: Deploy Vite Site to GitHub Pages
 
 on:
   push:
@@ -26,13 +26,15 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Build Next.js app
+      - name: Build Vite app
+        env:
+          GITHUB_REPOSITORY: ${{ github.repository }}
         run: npm run build
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: .next
+          path: build
           
   deploy:
     needs: build

@@ -4,6 +4,9 @@
   import path from 'path';
 
   export default defineConfig({
+    base: process.env.GITHUB_REPOSITORY 
+      ? (process.env.GITHUB_REPOSITORY.split('/')[1].includes('github.io') ? '/' : `/${process.env.GITHUB_REPOSITORY.split('/')[1]}/`)
+      : '/',
     plugins: [react()],
     resolve: {
       extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],
