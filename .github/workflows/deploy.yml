@@ -26,6 +26,12 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      - name: Clean build directory
+        run: |
+          rm -rf build
+          rm -rf dist
+          echo "Build directories cleaned"
+
       - name: Build Vite app
         env:
           GITHUB_REPOSITORY: ${{ github.repository }}
@@ -90,6 +96,26 @@ jobs:
           echo "✅ Build verification passed"
           echo "Asset references found:"
           grep -E "src=|href=.*assets" build/index.html
+
+      - name: Final verification before upload
+        run: |
+          echo "=== Final Verification ==="
+          echo "Contents of build directory:"
+          find build -type f -name "*.html" -o -name "*.js" -o -name "*.css" | head -20
+          echo ""
+          echo "Checking that NO source files are in build:"
+          if find build -name "main.jsx" -o -name "App.jsx" 2>/dev/null | grep -q .; then
+            echo "❌ ERROR: Source files found in build directory!"
+            exit 1
+          fi
+          echo "✅ No source files in build directory"
+          echo ""
+          echo "Verifying index.html one more time:"
+          if grep -q "/src/main.jsx" build/index.html 2>/dev/null; then
+            echo "❌ CRITICAL ERROR: Source index.html is being deployed!"
+            exit 1
+          fi
+          echo "✅ index.html is the built version"
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
