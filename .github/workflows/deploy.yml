@@ -34,6 +34,9 @@ jobs:
           npm run build
           echo "Build completed. Checking base path in index.html..."
           grep -E "src=|href=" build/index.html || true
+          echo "Ensuring .nojekyll file exists..."
+          touch build/.nojekyll || echo "" > build/.nojekyll
+          ls -la build/ | head -20
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3

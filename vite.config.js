@@ -2,40 +2,55 @@
   import { defineConfig } from 'vite';
   import react from '@vitejs/plugin-react-swc';
   import path from 'path';
+  import { writeFileSync } from 'fs';
 
   // Determine base path for GitHub Pages
+  // Repository: CodeAlpha_Portfolio_FA
+  // GitHub Pages URL: https://farhadalibayli.github.io/CodeAlpha_Portfolio_FA/
   function getBasePath() {
-    // If VITE_BASE_PATH is explicitly set, use it
+    // Priority 1: Explicit override via VITE_BASE_PATH
     if (process.env.VITE_BASE_PATH) {
-      return process.env.VITE_BASE_PATH.startsWith('/') 
+      const base = process.env.VITE_BASE_PATH.startsWith('/') 
         ? process.env.VITE_BASE_PATH 
-        : `/${process.env.VITE_BASE_PATH}/`;
+        : `/${process.env.VITE_BASE_PATH}`;
+      return base.endsWith('/') ? base : `${base}/`;
     }
     
-    // For GitHub Actions, extract repository name from GITHUB_REPOSITORY
-    // GITHUB_REPOSITORY format: "owner/repo-name"
+    // Priority 2: Extract from GITHUB_REPOSITORY (automatically available in GitHub Actions)
     if (process.env.GITHUB_REPOSITORY) {
       const parts = process.env.GITHUB_REPOSITORY.split('/');
       if (parts.length === 2) {
         const repoName = parts[1];
-        // If it's a github.io repo, use root, otherwise use repo name as base
-        if (repoName.includes('github.io')) {
+        // If it's a github.io repo (user's main site), use root
+        if (repoName.endsWith('.github.io')) {
           return '/';
         }
-        // Ensure base path starts and ends with /
+        // Otherwise use repo name as base path
         return `/${repoName}/`;
       }
     }
     
-    // Default to root for local development
-    return '/';
+    // Priority 3: Hardcoded fallback for this specific repository
+    // This ensures it works even if environment variables aren't set
+    return '/CodeAlpha_Portfolio_FA/';
   }
 
   const basePath = getBasePath();
+  console.log('Vite base path configured as:', basePath);
+
+  // Plugin to generate .nojekyll file for GitHub Pages
+  const nojekyllPlugin = () => {
+    return {
+      name: 'nojekyll',
+      writeBundle() {
+        writeFileSync(path.resolve(__dirname, 'build/.nojekyll'), '');
+      },
+    };
+  };
 
   export default defineConfig({
     base: basePath,
-    plugins: [react()],
+    plugins: [react(), nojekyllPlugin()],
     resolve: {
       extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],
       alias: {
@@ -83,6 +98,12 @@
     build: {
       target: 'esnext',
       outDir: 'build',
+      // Generate .nojekyll file to prevent GitHub Pages from ignoring certain files
+      rollupOptions: {
+        output: {
+          assetFileNames: 'assets/[name].[hash][extname]',
+        },
+      },
     },
     server: {
       port: 3000,
