@@ -14,7 +14,7 @@ export default defineConfig({
     {
       name: 'nojekyll',
       writeBundle(_, bundle) {
-        const outDir = 'build';
+        const outDir = 'docs';
         writeFileSync(path.resolve(outDir, '.nojekyll'), '');
       },
     },
@@ -28,7 +28,7 @@ export default defineConfig({
 
   build: {
     target: 'esnext',
-    outDir: 'build',
+    outDir: 'docs',
     assetsDir: 'assets',
   },
 
