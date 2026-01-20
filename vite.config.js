@@ -4,18 +4,21 @@ import path from 'path';
 import { writeFileSync } from 'fs';
 
 export default defineConfig({
-  // ✅ GitHub Pages base path (FIX #1)
-  base: '/CodeAlpha_Portfolio_FA/',
+  // ✅ Base path for custom domain (root)
+  base: '/',
 
   plugins: [
     react(),
 
-    // ✅ .nojekyll MUST be written into OUTDIR (FIX #2)
+    // ✅ Write .nojekyll and CNAME into /docs for GitHub Pages + custom domain
     {
-      name: 'nojekyll',
-      writeBundle(_, bundle) {
+      name: 'pages-meta',
+      writeBundle() {
         const outDir = 'docs';
+        // Prevent Jekyll processing
         writeFileSync(path.resolve(outDir, '.nojekyll'), '');
+        // Custom domain for GitHub Pages
+        writeFileSync(path.resolve(outDir, 'CNAME'), 'farhadalibayli.site\n');
       },
     },
   ],
