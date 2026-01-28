@@ -4,75 +4,71 @@ import { Card } from "./ui/card";
 import { Button } from "./ui/button";
 import { Badge } from "./ui/badge";
 import { Github, ArrowRight } from "lucide-react";
+import { useLanguage } from "../context/LanguageContext";
 
 export function Projects() {
   const [visibleCount, setVisibleCount] = useState(6);
+  const { t } = useLanguage();
 
-  const projects = [
+  const projectStruct = [
     {
-      title: "Idea-finder",
-      description: "Idea Finder is an AI-powered web app that generates real business ideas based on a keyword, location, and budget.",
-      technologies: ["TypeScript", "Llama3", "Ollama", "Cheerio"],
-      github: "https://github.com/farhadalibayli/idea-finder.git",
+      image: "https://i.imgur.com/gdMZklD.png",
+      github: "https://github.com/farhadalibayli/Skillmatch.git",
+      technologies: ["TypeScript", "n8n", "PostgreSQL", "Next.js"],
+    },
+    {
       image: "https://i.imgur.com/IBwh0le.png",
+      github: "https://github.com/farhadalibayli/idea-finder.git",
+      technologies: ["TypeScript", "Llama3", "Ollama", "Cheerio"],
     },
     {
-      title: "InternLink",
-      description: "This is a frontend web project for an “InternLink” website — a platform UI focused on internships.",
-      technologies: ["Javascript", "Vite", "HTML", "CSS"],
-      github: "https://github.com/farhadalibayli/InternLink.git",
       image: "https://i.imgur.com/M5rjvnG.png",
+      github: "https://github.com/farhadalibayli/InternLink.git",
+      technologies: ["Javascript", "Vite", "HTML", "CSS"],
     },
     {
-      title: "Music-Player",
-      description: "A modern, responsive music player web application built with React and Vite, providing a sleek interface for playing audio tracks with multiple controls and features.",
-      technologies: ["React", "Vite", "TypeScript", "CSS"],
-      github: "https://github.com/farhadalibayli/CodeAlpha_Music-Player",
       image: "https://i.imgur.com/wty396F.png",
-    },
-    {
-      title: "Calculator",
-      description: "A modern, responsive calculator web application built with React and Vite, featuring a sleek glass-morphism UI design with smooth animations and a history feature.",
+      github: "https://github.com/farhadalibayli/CodeAlpha_Music-Player",
       technologies: ["React", "Vite", "TypeScript", "CSS"],
-      github: "https://github.com/farhadalibayli/CodeAlpha_Calculator",
+    },
+    {
       image: "https://i.imgur.com/Ui2Gt3W.png",
+      github: "https://github.com/farhadalibayli/CodeAlpha_Calculator",
+      technologies: ["React", "Vite", "TypeScript", "CSS"],
     },
     {
-      title: "Q&A platform",
-      description: "RealCavab is a multilingual Q&A platform with smart search, real-time moderation, and strong user management.",
-      technologies: ["TypeScript", "Node.js", "CSS", "MySQL"],
-      github: "https://github.com/farhadalibayli/RealCavab-Public-Showcase",
       image: "https://i.imgur.com/jBzlCnJ.png",
+      github: "https://github.com/farhadalibayli/RealCavab-Public-Showcase",
+      technologies: ["TypeScript", "Node.js", "CSS", "MySQL"],
     },
     {
-      title: "Projectify",
-      description: "Projectify instantly generates unique tech project ideas based on your choices.",
-      technologies: ["TypeScript", "JavaScript", "CSS", "HTML"],
-      github: "https://github.com/farhadalibayli/Projectify",
       image: "https://i.imgur.com/CErvqxj.png",
+      github: "https://github.com/farhadalibayli/Projectify",
+      technologies: ["TypeScript", "JavaScript", "CSS", "HTML"],
     },
     {
-      title: "Workable",
-      description: "A modern, full-stack dashboard application with real-time weather, news, and task management.",
-      technologies: ["CSS", "TypeScript", "Java", "OpenWeather API"],
-      github: "https://github.com/farhadalibayli/weather-news-dashboard",
       image: "https://i.imgur.com/cjETiZ1.png",
+      github: "https://github.com/farhadalibayli/weather-news-dashboard",
+      technologies: ["CSS", "TypeScript", "Java", "OpenWeather API"],
     },
     {
-      title: "Currency Convertor",
-      description: "A microservices-based currency converter with real-time CBAR rates and a modern React frontend.",
-      technologies: ["Java", "TypeScript", "CSS", "React"],
-      github: "https://github.com/farhadalibayli/Currency-Convertor",
       image: "https://i.imgur.com/R8tzoc6.png",
+      github: "https://github.com/farhadalibayli/Currency-Convertor",
+      technologies: ["Java", "TypeScript", "CSS", "React"],
     },
     {
-      title: "Plan Meal",
-      description: "A full-stack app that creates personalized weekly meal plans using a React frontend, Spring Boot backend, and the Edamam API.",
-      technologies: ["TypeScript", "Java", "Spring Boot", "Edamam API"],
-      github: "https://github.com/farhadalibayli/PlanMeal",
       image: "https://i.imgur.com/rPYLTGB.png",
+      github: "https://github.com/farhadalibayli/PlanMeal",
+      technologies: ["TypeScript", "Java", "Spring Boot", "Edamam API"],
     },
   ];
+
+  const translatedItems = t('projects.items') || [];
+  const projects = projectStruct.map((p, i) => ({
+    ...p,
+    title: translatedItems[i]?.title || "",
+    description: translatedItems[i]?.description || ""
+  }));
 
   const visibleProjects = projects.slice(0, visibleCount);
   const hasMore = visibleCount < projects.length;
@@ -88,10 +84,10 @@ export function Projects() {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="text-4xl font-bold text-center mb-4">Projects</h2>
+          <h2 className="text-4xl font-bold text-center mb-4">{t('projects.title')}</h2>
           <div className="w-20 h-1 bg-blue-600 mx-auto mb-4"></div>
           <p className="text-center text-gray-600 max-w-2xl mx-auto mb-12">
-            A showcase of my recent work and side projects
+            {t('projects.subtitle')}
           </p>
         </motion.div>
 
@@ -145,7 +141,7 @@ export function Projects() {
                       <Button variant="outline" size="sm" className="w-full group/btn" asChild>
                         <a href={project.website} target="_blank" rel="noopener noreferrer">
                           <ArrowRight className="w-4 h-4 mr-2 group-hover/btn:translate-x-1 transition-transform" />
-                          View Website
+                          {t('projects.viewWebsite')}
                         </a>
                       </Button>
                     )}
@@ -153,7 +149,7 @@ export function Projects() {
                       <Button variant="outline" size="sm" className="w-full group/btn" asChild>
                         <a href={project.github} target="_blank" rel="noopener noreferrer">
                           <Github className="w-4 h-4 mr-2 group-hover/btn:rotate-12 transition-transform" />
-                          View Code
+                          {t('projects.viewCode')}
                         </a>
                       </Button>
                     )}
@@ -173,7 +169,7 @@ export function Projects() {
             transition={{ duration: 0.6 }}
           >
             <Button size="lg" onClick={() => setVisibleCount((prev) => Math.min(prev + 6, projects.length))} className="bg-blue-600 hover:bg-blue-700 group">
-              Show More Projects
+              {t('projects.showMore')}
               <motion.div className="ml-2" animate={{ x: [0, 5, 0] }} transition={{ duration: 1.5, repeat: Infinity }}>
                 <ArrowRight className="w-5 h-5" />
               </motion.div>

@@ -1,28 +1,31 @@
 import { motion } from "motion/react";
 import { Code2, Lightbulb, Target, Sparkles } from "lucide-react";
 import { Card } from "./ui/card";
+import { useLanguage } from "../context/LanguageContext";
 
 export function About() {
+  const { t } = useLanguage();
+
   const highlights = [
     {
       icon: Code2,
-      title: "Clean Code",
-      description: "Writing maintainable, scalable, and efficient code",
+      title: t('about.highlights.cleanCode.title'),
+      description: t('about.highlights.cleanCode.desc'),
     },
     {
       icon: Lightbulb,
-      title: "Problem Solving",
-      description: "Creative solutions to complex technical challenges",
+      title: t('about.highlights.problemSolving.title'),
+      description: t('about.highlights.problemSolving.desc'),
     },
     {
       icon: Target,
-      title: "User-Focused",
-      description: "Building applications with user experience in mind",
+      title: t('about.highlights.userFocused.title'),
+      description: t('about.highlights.userFocused.desc'),
     },
     {
       icon: Sparkles,
-      title: "Innovation",
-      description: "Exploring cutting-edge technologies and best practices",
+      title: t('about.highlights.innovation.title'),
+      description: t('about.highlights.innovation.desc'),
     },
   ];
 
@@ -63,7 +66,7 @@ export function About() {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="text-4xl font-bold text-center mb-4">About Me</h2>
+          <h2 className="text-4xl font-bold text-center mb-4">{t('about.title')}</h2>
           <div className="w-20 h-1 bg-blue-600 mx-auto mb-12"></div>
         </motion.div>
 
@@ -106,7 +109,7 @@ export function About() {
               viewport={{ once: true }}
               transition={{ delay: 0.2 }}
             >
-              Hello! I'm Farhad
+              {t('about.hello')}
             </motion.h3>
             <motion.p
               className="text-gray-600 mb-4"
@@ -115,10 +118,7 @@ export function About() {
               viewport={{ once: true }}
               transition={{ delay: 0.3 }}
             >
-              I'm a passionate Full-Stack Developer who enjoys creating elegant and 
-              user-friendly web applications. My journey in programming began during
-              my engineering studies, where I discovered the perfect balance between 
-              creativity and problem-solving.
+              {t('about.p1')}
             </motion.p>
             <motion.p
               className="text-gray-600 mb-4"
@@ -127,10 +127,7 @@ export function About() {
               viewport={{ once: true }}
               transition={{ delay: 0.4 }}
             >
-              I strive to build solutions that are both functional and intuitive, with a
-              focus on clean, maintainable code. I enjoy tackling challenging 
-              problems, learning continuously, and exploring new approaches to 
-              improve user experiences.
+              {t('about.p2')}
             </motion.p>
             <motion.p
               className="text-gray-600"
@@ -139,10 +136,7 @@ export function About() {
               viewport={{ once: true }}
               transition={{ delay: 0.5 }}
             >
-              Beyond coding, I’m curious about the latest trends in technology and love 
-              experimenting with ideas that make digital interactions smoother and more 
-              meaningful. My goal is to create applications that not only work well but 
-              also provide real value to users.
+              {t('about.p3')}
             </motion.p>
           </motion.div>
         </div>

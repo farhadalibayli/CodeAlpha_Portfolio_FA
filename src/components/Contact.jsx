@@ -1,14 +1,16 @@
 import { motion } from "motion/react";
 import { Github, Linkedin, Mail, Send } from "lucide-react";
+import { useLanguage } from "../context/LanguageContext";
 
 export function Contact() {
+  const { t } = useLanguage();
   const contactMethods = [
     {
       name: "Email",
       icon: Mail,
       value: "alibaylifarhad@gmail.com",
       link: "mailto:alibaylifarhad@gmail.com",
-      color: "from-red-500 to-orange-500",  
+      color: "from-red-500 to-orange-500",
       hoverColor: "hover:shadow-red-500/50",
     },
     {
@@ -90,8 +92,8 @@ export function Contact() {
               <Send className="w-12 h-12 text-blue-400" />
             </div>
           </motion.div>
-          
-          <h2 className="text-white mb-6 text-5xl sm:text-6xl">Let's Connect</h2>
+
+          <h2 className="text-white mb-6 text-5xl sm:text-6xl">{t('contact.title')}</h2>
           <motion.div
             className="w-24 h-1 bg-gradient-to-r from-blue-400 to-purple-400 mx-auto mb-6"
             initial={{ width: 0 }}
@@ -100,7 +102,7 @@ export function Contact() {
             transition={{ duration: 0.8, delay: 0.2 }}
           />
           <p className="text-gray-300 text-xl max-w-2xl mx-auto leading-relaxed">
-            Have a project in mind or want to collaborate? I'm always open to discussing new opportunities and ideas.
+            {t('contact.subtitle')}
           </p>
         </motion.div>
 
@@ -131,7 +133,7 @@ export function Contact() {
                 <motion.div
                   className={`absolute inset-0 rounded-2xl bg-gradient-to-br ${method.color} opacity-0 group-hover:opacity-10 transition-opacity duration-300`}
                 />
-                
+
                 <div className="relative z-10">
                   <motion.div
                     className={`inline-flex p-4 bg-gradient-to-br ${method.color} rounded-xl mb-6 shadow-lg`}
@@ -145,7 +147,7 @@ export function Contact() {
                   </motion.div>
 
                   <h3 className="text-white text-2xl mb-3">{method.name}</h3>
-                  
+
                   <p className="text-blue-300 break-all group-hover:text-blue-200 transition-colors">
                     {method.value}
                   </p>
@@ -156,7 +158,7 @@ export function Contact() {
                     initial={{ x: 0 }}
                     whileHover={{ x: 5 }}
                   >
-                    <span className="text-sm">Connect</span>
+                    <span className="text-sm">{t('contact.connect')}</span>
                     <svg
                       className="w-4 h-4"
                       fill="none"

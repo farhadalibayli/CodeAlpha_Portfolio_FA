@@ -1,12 +1,14 @@
 import { motion } from "motion/react";
 import { Card } from "./ui/card";
-import { Code, Server, Database, Wrench } from "lucide-react";
+import { useLanguage } from "../context/LanguageContext";
 
 export function Skills() {
+  const { t } = useLanguage();
+
   const skillCategories = [
     {
-      title: "Frontend",
-      icon: Code,
+      title: t('skills.categories.frontend'),
+      image: "https://i.imgur.com/in7Xcq6.png",
       color: "blue",
       skills: [
         { name: "React", level: 85 },
@@ -16,8 +18,8 @@ export function Skills() {
       ],
     },
     {
-      title: "Backend",
-      icon: Server,
+      title: t('skills.categories.backend'),
+      image: "https://i.imgur.com/3RJUfWP.png",
       color: "green",
       skills: [
         { name: "Node.js", level: 80 },
@@ -27,8 +29,8 @@ export function Skills() {
       ],
     },
     {
-      title: "Databases",
-      icon: Database,
+      title: t('skills.categories.databases'),
+      image: "https://i.imgur.com/3RJUfWP.png",
       color: "purple",
       skills: [
         { name: "MySQL", level: 90 },
@@ -38,8 +40,8 @@ export function Skills() {
       ],
     },
     {
-      title: "Tools & DevOps",
-      icon: Wrench,
+      title: t('skills.categories.tools'),
+      image: "https://i.imgur.com/rMI6VGX.png",
       color: "orange",
       skills: [
         { name: "Git", level: 95 },
@@ -110,7 +112,7 @@ export function Skills() {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="text-4xl font-bold text-center mb-4">Skills & Expertise</h2>
+          <h2 className="text-4xl font-bold text-center mb-4">{t('skills.title')}</h2>
           <motion.div
             className="w-20 h-1 bg-blue-600 mx-auto mb-4"
             initial={{ width: 0 }}
@@ -119,7 +121,7 @@ export function Skills() {
             transition={{ duration: 0.8, delay: 0.2 }}
           />
           <p className="text-center text-gray-600 max-w-2xl mx-auto mb-12">
-            Technologies and tools I work with to bring ideas to life
+            {t('skills.subtitle')}
           </p>
         </motion.div>
 
@@ -148,13 +150,13 @@ export function Skills() {
                     viewport={{ once: true }}
                     transition={{ delay: categoryIndex * 0.15 + 0.2 }}
                   >
-                    <motion.div
-                      className={`p-3 rounded-xl ${colorClasses.bg} bg-opacity-10 shadow-lg`}
-                      whileHover={{ rotate: [0, -10, 10, -10, 0], scale: 1.1 }}
-                      transition={{ duration: 0.5 }}
-                    >
-                      <category.icon className={`w-6 h-6 ${colorClasses.text}`} />
-                    </motion.div>
+                    <div className="w-12 h-12 rounded-xl overflow-hidden relative group shadow-lg shrink-0">
+                      <img
+                        src={category.image}
+                        alt={category.title}
+                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                      />
+                    </div>
                     <h3>{category.title}</h3>
                   </motion.div>
 

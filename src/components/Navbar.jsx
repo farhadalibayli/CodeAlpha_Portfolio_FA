@@ -1,11 +1,14 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { Menu, X } from "lucide-react";
+import { LanguageSwitcher } from "./LanguageSwitcher";
+import { useLanguage } from "../context/LanguageContext";
 
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
+  const { t } = useLanguage();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -29,12 +32,12 @@ export function Navbar() {
   }, []);
 
   const navLinks = [
-    { name: "Home", href: "#home" },
-    { name: "About", href: "#about" },
-    { name: "Skills", href: "#skills" },
-    { name: "Projects", href: "#projects" },
-    { name: "Resume", href: "#resume" },
-    { name: "Contact", href: "#contact" },
+    { name: t('navbar.home'), href: "#home" },
+    { name: t('navbar.about'), href: "#about" },
+    { name: t('navbar.skills'), href: "#skills" },
+    { name: t('navbar.projects'), href: "#projects" },
+    { name: t('navbar.resume'), href: "#resume" },
+    { name: t('navbar.contact'), href: "#contact" },
   ];
 
   const scrollToSection = (href) => {
@@ -45,40 +48,16 @@ export function Navbar() {
 
   return (
     <motion.nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? "bg-white/90 backdrop-blur-md shadow-md" : "bg-transparent"
-      }`}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? "bg-white/90 backdrop-blur-md shadow-md" : "bg-transparent"
+        }`}
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.6, type: "spring", stiffness: 100 }}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center py-4">
-          {/* Logo */}
-          <motion.button
-            onClick={() => scrollToSection("#home")}
-            className={`transition-colors ${
-              isScrolled ? "text-gray-900" : "text-white"
-            }`}
-            whileHover={{ scale: 1.8 }}
-            whileTap={{ scale: 1.1 }}
-          >
-            <motion.span
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.2 }}
-            >
-              <span className="text-blue-800">{"<"}</span>
-              <motion.span
-                whileHover={{ scale: 1.2, color: "#16a34a" }}
-                className="inline-block text-gray-900 font-bold"
-                style={{ color: '#16a34a' }}
-              >
-                FA
-              </motion.span>
-              <span className="text-blue-800">{"/>"}</span>
-            </motion.span>
-          </motion.button>
+          {/* Language Switcher (replaced Logo) */}
+          <LanguageSwitcher isScrolled={isScrolled} />
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-8">
@@ -86,9 +65,8 @@ export function Navbar() {
               <motion.button
                 key={link.name}
                 onClick={() => scrollToSection(link.href)}
-                className={`relative transition-colors ${
-                  isScrolled ? "text-gray-700" : "text-white"
-                } ${activeSection === link.href.substring(1) ? "text-blue-600" : ""}`}
+                className={`relative transition-colors ${isScrolled ? "text-gray-700" : "text-white"
+                  } ${activeSection === link.href.substring(1) ? "text-blue-600" : ""}`}
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.1 * index }}

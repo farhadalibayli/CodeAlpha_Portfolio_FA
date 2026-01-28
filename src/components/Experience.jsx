@@ -2,183 +2,67 @@ import { motion } from "motion/react";
 import { Card } from "./ui/card";
 import { Button } from "./ui/button";
 import { Briefcase, GraduationCap, Download, Heart } from "lucide-react";
+import { useLanguage } from "../context/LanguageContext";
 
 export function Experience() {
-  const experiences = [
-    {
-      type: "work",
-      title: "Back End Developer Internship",
-      company: "DOST Digital Innovations Center",
-      location: "Baku, Azerbaijan, Remote",
-      period: "Aug 2025 - Dec 2025",
-      description: [
-        "Designed and implemented server-side logic for backend projects",
-        "Built APIs and created efficient algorithms to solve problems",
-        "Worked on real-world applications to improve functionality and performance",
-      ],
-    },
-    {
-      type: "work",
-      title: "Frontend Developer Internship",
-      company: "CodeAlpha",
-      location: "Online, Remote",
-      period: "Nov 2025 - Dec 2025",
-      description: [
-        "Developed responsive web interfaces using JavaScript, HTML, and CSS",
-        "Implemented interactive features and UI components across real project tasks",
-        "Enhanced code quality and frontend performance through continuous practice",
-      ],
-    },
-    {
-      type: "work",
-      title: "Data Analyst Internship",
-      company: "State Agency for Preschool and General Education",
-      location: "Baku, Azerbaijan",
-      period: "Jun 2025 - Jul 2025",
-      description: [
-        "Assisted in analyzing educational data to support strategic decisions",
-        "Created reports and insights using Excel",
-        "Contributed to policy improvements for early childhood education",
-      ],
-    },
-    {
-      type: "work",
-      title: "Full-stack Developer Internship",
-      company: "State Agency for Public Service and Social Innovations under the President of Azerbaijan",
-      location: "Baku, Azerbaijan",
-      period: "Jun 2025 - Jul 2025",
-      description: [
-        "Worked on frontend and backend development of digital platforms",
-        "Collaborated with teams, writing clean and efficient code",
-        "Contributed to government tech projects improving public services",
-      ],      
-    },
-    {
-      type: "work",
-      title: "Back End Developer Internship",
-      company: "Innovation and Digital Development Agency",
-      location: "Baku, Azerbaijan",
-      period: "Jun 2023 - Aug 2023",
-      description: [
-        "Learning and applying Java and Spring Boot for backend development",
-        "Developed and maintained server-side applications",
-        "Gained practical experience in building efficient backend solutions",
-      ],      
-    },
-    {
-      type: "work",
-      title: "Sap Advanced Business Application Programming Developer Internship",
-      company: "Saphire",
-      location: "Baku, Azerbaijan",
-      period: "Dec 2022 - Mar 2023",
-      description: [
-        "Developed and maintained ABAP reports, interfaces, and enhancements",
-        "Created and updated forms for business processes",
-        "Ensured efficient and reliable system functionality",
-      ],      
-    },
+  const { t } = useLanguage();
+
+  const experiencesStruct = [
+    { type: "work", period: "Aug 2025 - Dec 2025" },
+    { type: "work", period: "Nov 2025 - Dec 2025" },
+    { type: "work", period: "Jun 2025 - Jul 2025" },
+    { type: "work", period: "Jun 2025 - Jul 2025" },
+    { type: "work", period: "Jun 2023 - Aug 2023" },
+    { type: "work", period: "Dec 2022 - Mar 2023" },
   ];
 
-  
-  
-  
-  const education = [
-    {
-      degree: "Bachelor of Science in Computer Engineering",
-      institution: "ADA University",
-      location: "Baku, Azerbaijan",
-      period: "2022 - 2026",
-      details: [
-        "Relevant Coursework: Data Structures, Algorithms, Programming Principles 2, Digital Logic Design",
-      ],
-    },
+  const educationStruct = [
+    { period: "2022 - 2026", honors: "" },
   ];
 
-  
-  
-  
-  
-  const volunteering = [  
-    {
-      title: "Volunteer",
-      company: "Formula 1",
-      location: "Baku, Azerbaijan",
-      period: "sep 2025",
-      details: [
-        "Volunteered in the grandstand at Formula One, assisting spectators and ensuring smooth operations",
-      ],
-    },
-    {
-      title: "President",
-      company: "ADA Watchmen",
-      location: "Baku, Azerbaijan",
-      period: "oct 2022 - aug 2025",
-      details: [
-        "Volunteered at ADA University, supporting events and promoting a safe, inclusive environment",
-      ],
-    },
-    {
-      title: "Volunteer",
-      company: "Formula 1",
-      location: "Baku, Azerbaijan",
-      period: "sep 2024",
-      details: [
-        "Volunteered in spectator services, assisting attendees and ensuring smooth event operations",
-      ],
-    },
-    {
-      title: "Volunteer",
-      company: "ICRC Azerbaijan",
-      location: "Baku, Azerbaijan",
-      period: "aug 2023",
-      details: [
-        "Volunteered at the International Committee of the Red Cross (ICRC) Azerbaijan",
-      ],
-    },
-    {
-      title: "Volunteer",
-      company: "ESN Azerbaijan",
-      location: "Baku, Azerbaijan",
-      period: "mar 2023",
-      details: [
-        "Volunteered at Erasmus Student Network Azerbaijan, supporting student activities and community events",
-      ],
-    },
-    {
-      title: "Volunteer",
-      company: "Mars Academy",
-      location: "Baku, Azerbaijan",
-      period: "Dec 2022",
-      details: [
-        "Volunteered with Mars Academy at ADA University, supporting robotics competitions and student activities",
-      ],
-    },
-    {
-      title: "Delegate",
-      company: "EYP Azerbaijan",
-      location: "Baku, Azerbaijan",
-      period: "May 2022",
-      details: [
-        "Served as a delegate at European Youth Parliament (EYP) Azerbaijan, participating in debate sessions and discussions",
-      ],
-    },
+  const volunteeringStruct = [
+    { period: "Sep 2025" },
+    { period: "Oct 2022 - Aug 2025" },
+    { period: "Sep 2024" },
+    { period: "Aug 2023" },
+    { period: "Mar 2023" },
+    { period: "Dec 2022" },
+    { period: "May 2022" },
   ];
+
+  const translatedJobs = t('experience.jobs') || [];
+  const experiences = experiencesStruct.map((e, i) => ({
+    ...e,
+    ...(translatedJobs[i] || {})
+  }));
+
+  const translatedEdu = t('experience.edu') || [];
+  const education = educationStruct.map((e, i) => ({
+    ...e,
+    ...(translatedEdu[i] || {})
+  }));
+
+  const translatedVol = t('experience.vol') || [];
+  const volunteering = volunteeringStruct.map((v, i) => ({
+    ...v,
+    ...(translatedVol[i] || {})
+  }));
 
   const handleDownloadResume = () => {
     try {
       // Use import.meta.env.BASE_URL to get the base path for GitHub Pages
       const baseUrl = import.meta.env.BASE_URL;
       const resumeUrl = `${baseUrl}resume/Farhad_Alibayli_Resume.pdf`;
-      
+
       // Create a temporary anchor element
       const link = document.createElement('a');
       link.href = resumeUrl;
       link.download = 'Farhad_Alibayli_Resume.pdf';
-      
+
       // Append to body, trigger download, and clean up
       document.body.appendChild(link);
       link.click();
-      
+
       // Clean up
       setTimeout(() => {
         document.body.removeChild(link);
@@ -201,12 +85,12 @@ export function Experience() {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="text-center mb-4">Experience & Education</h2>
+          <h2 className="text-center mb-4">{t('experience.title')}</h2>
           <div className="w-20 h-1 bg-blue-600 mx-auto mb-4"></div>
           <p className="text-center text-gray-600 max-w-2xl mx-auto mb-8">
-            My professional journey and academic background
+            {t('experience.subtitle')}
           </p>
-          
+
           <div className="flex justify-center mb-12">
             <Button
               onClick={handleDownloadResume}
@@ -214,7 +98,7 @@ export function Experience() {
               className="bg-blue-600 hover:bg-blue-700 transition-colors"
             >
               <Download className="w-5 h-5 mr-2" />
-              Download Full Resume
+              {t('experience.downloadResume')}
             </Button>
           </div>
         </motion.div>
@@ -231,7 +115,7 @@ export function Experience() {
             <div className="p-3 bg-blue-100 rounded-lg">
               <Briefcase className="w-6 h-6 text-blue-600" />
             </div>
-            <h3>Work Experience</h3>
+            <h3>{t('experience.workExperience')}</h3>
           </motion.div>
 
           <div className="space-y-6">
@@ -278,7 +162,7 @@ export function Experience() {
             <div className="p-3 bg-green-100 rounded-lg">
               <GraduationCap className="w-6 h-6 text-green-600" />
             </div>
-            <h3>Education</h3>
+            <h3>{t('experience.education')}</h3>
           </motion.div>
 
           {education.map((edu, index) => (
@@ -326,7 +210,7 @@ export function Experience() {
             <div className="p-3 bg-purple-100 rounded-lg">
               <Heart className="w-6 h-6 text-purple-600" />
             </div>
-            <h3>Volunteering</h3>
+            <h3>{t('experience.volunteering')}</h3>
           </motion.div>
 
           <div className="space-y-6">

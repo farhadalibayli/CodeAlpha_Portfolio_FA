@@ -1,8 +1,10 @@
 import { motion } from "motion/react";
 import { Button } from "./ui/button";
 import { ArrowDown, Code2, Terminal } from "lucide-react";
+import { useLanguage } from "../context/LanguageContext";
 
 export function Hero() {
+  const { t } = useLanguage();
   const scrollToSection = (id) => {
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
   };
@@ -122,7 +124,7 @@ export function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2, duration: 0.6 }}
           >
-            Full-Stack Developer
+            {t('hero.role')}
           </motion.p>
 
           <motion.h1
@@ -160,7 +162,7 @@ export function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5, duration: 0.6 }}
           >
-            Leadeship. Innovation. Vision.
+            {t('hero.tagline')}
           </motion.p>
 
           <motion.div
@@ -181,7 +183,7 @@ export function Hero() {
                   whileHover={{ x: "100%" }}
                   transition={{ duration: 0.5 }}
                 />
-                <span className="relative">Projects</span>
+                <span className="relative">{t('hero.projectsBtn')}</span>
               </Button>
             </motion.div>
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
@@ -197,7 +199,7 @@ export function Hero() {
                   whileHover={{ scale: 1, opacity: 1 }}
                   transition={{ duration: 0.3 }}
                 />
-                <span className="relative">Contact</span>
+                <span className="relative">{t('hero.contactBtn')}</span>
               </Button>
             </motion.div>
           </motion.div>
@@ -217,7 +219,7 @@ export function Hero() {
           aria-label="Scroll down"
           whileHover={{ scale: 1.1 }}
         >
-          <span className="text-sm tracking-wider">Scroll Down</span>
+          <span className="text-sm tracking-wider">{t('hero.scrollDown')}</span>
           <motion.div
             animate={{
               y: [0, 8, 0],
