@@ -17,7 +17,7 @@ export default defineConfig({
 
   build: {
     target: 'esnext',
-    outDir: 'docs',   // IMPORTANT: GitHub Pages folder
+    outDir: 'dist',   // Standardize output directory
     assetsDir: 'assets',
     emptyOutDir: true,
   },
